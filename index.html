@@ -267,39 +267,40 @@
     Contact Me
    </h2>
    
-   <form action="https://formsubmit.co/kavan.m.patel2706@email.com" class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8" method="POST">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-     <div>
-      <label class="block mb-2 font-semibold text-gray-700" for="name">
-       Name
-      </label>
-      <input class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="name" name="name" placeholder="Your full name" required="" type="text"/>
-     </div>
-     <div>
-      <label class="block mb-2 font-semibold text-gray-700" for="email">
-       Email
-      </label>
-      <input class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
-     </div>
-    </div>
-    <div class="mb-6">
-     <label class="block mb-2 font-semibold text-gray-700" for="subject">
-      Subject
-     </label>
-     <input class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="subject" name="subject" placeholder="Subject of your message" required="" type="text"/>
-    </div>
-    <div class="mb-6">
-     <label class="block mb-2 font-semibold text-gray-700" for="message">
-      Message
-     </label>
-     <textarea class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="message" name="message" placeholder="Write your message here..." required="" rows="5"></textarea>
-    </div>
-    <div class="text-center">
-     <button class="bg-indigo-600 text-white font-semibold px-8 py-3 rounded shadow hover:bg-indigo-700 transition" type="submit">
-      Send Message
-     </button>
-    </div>
-   </form>
+  <form id="contact-form">
+  <input type="text" name="name" required placeholder="Your Name">
+  <input type="email" name="email" required placeholder="Your Email">
+  <textarea name="message" required placeholder="Your Message"></textarea>
+  <button type="submit">Send</button>
+</form>
+
+<script>
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      message: form.message.value
+    };
+
+    const webhookUrl = "YOUR_SCRIPT_URL_HERE"; // Replace with your Web App URL
+
+    try {
+      const res = await fetch(webhookUrl, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      });
+      alert("Message sent successfully!");
+      form.reset();
+    } catch (err) {
+      alert("Error! Please try again.");
+    }
+  });
+</script>
+
   </section>
   <footer class="bg-gray-800 text-gray-300 py-8">
    <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
